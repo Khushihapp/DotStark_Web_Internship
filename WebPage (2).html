@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel = "stylesheet" href ="style.css">
+        <meta charset="UTF-8">
+        <meta name ="description" content ="DOT StarkTechnologies">
+        <title>Dot Stark Technologies</title>
+    </head>
+    <body>
+        <header>
+            <h1><b>DotStark</b></h1>
+            <hr/>
+            <p>Building simple and reliable technology solutions.</p>
+
+        </header>
+        <nav aria-label ="Main navigation">
+            <a href ="#company-profile">Company-Profile</a>
+            <a href = "#Contact-Us"> Contact-Us</a>
+            
+        </nav>
+        <main>
+        <div class = "banner">
+            <p>Innovative Technology Solutions for Modern Businesses</p>
+        </div>
+        
+            <section id = "company-profile">
+                <h2> Company Profile</h2>
+                <h3>About Us</h3>
+                <div id ="About-us">
+                <p>Dot Stark Technologies is a technology company focused on providing innovative digital solutions and helping businesses use modern technologies effectively.</p>
+                </div>
+                <h3> Our Services</h3>
+                <div id ="our-services">
+                <p>Web Development: We develop user-friendly and responsive websites.</p>
+                    
+                   <p> Software Solutions: We build software solutions according to business requirements.</p>
+                    
+                    <p>Technology Solutions: We help businesses adopt modern technologies to improve their digital operations.</p>
+                </div>
+                </section>    
+            <section id = "Contact-Us">
+                <h2>Contact Us</h2>
+                <form>
+                    <div>
+                        <label for = "name">Enter your name :</label>
+                        <input id = "name" type ="text" name = "Name" placeholder="Enter name" required>
+                     </div>
+                     <br/>
+                     <div>
+                         <label for  = "email">Enter email : </label>
+                        <input type ="email"id ="email" name = "email" placeholder="Enter your email" required>
+                     </div>
+                     <br/>
+                     <div>
+                        <label for = "phone">Contact: </label>
+                        <input type ="tel"id ="phone" name ="phone" pattern="[0-9]{10}"maxlength ="10" inputmode ="numeric" placeholder ="Enter your contact" required>
+
+                     </div>
+                     <br/>
+                     <div>
+                        <label for= "query">Query :</label>
+                        <br/>
+                        <textarea id = "query" name ="query" rows ="7" cols ="40"></textarea>
+                     </div>
+                     <div>
+                        <button type ="submit">Submit</button>
+                     </div>
+                    </form>
+
+            </section>
+
+        </main>
+        <footer>
+            <p>© 2026 Dot Stark Technologies. All rights reserved.</p>
+            <p>Email: contact@dotstark.com</p>
+        </footer>
+    </body>
+</html>

@@ -5,6 +5,7 @@ const router = express.Router();
 const authenticateToken = require("../middleware/auth");
 const taskController = require("../controllers/taskController");
 const {validateCreateTask, validateUpdateTask} = require("../middleware/validateTask");
+router.get("/tasks/stats", authenticateToken, taskController.getTaskStats);
 router.get(
     "/tasks",
     authenticateToken,

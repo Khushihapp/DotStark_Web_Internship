@@ -1,38 +1,40 @@
 const taskService = require("../services/taskServices");
 
-const getTasks =(req,res) =>{
-    const tasks = taskService.getTasks();
+const getTasks = async (req, res) => {
+    const tasks = await taskService.getTasks();
     res.json(tasks);
 };
 
-const createTask =(req,res) =>{
-    const newTask = taskService.createTask(req.body.title);
+const createTask = async (req, res) => {
+    const newTask = await taskService.createTask(req.body.title);
     res.status(201).json(newTask);
-}
+};
 
-const updateTask = (req ,res)  => {
-    const id = Number(req.params.id);
-    const task = taskService.updateTask(
-        id,
+const updateTask = async (req, res) => {
+    const task = await taskService.updateTask(
+        req.params.id,
         req.body.title,
         req.body.completed
     );
+
     if (!task) {
         return res.status(404).json({
             message: "Task not found"
         });
     }
+
     res.json(task);
 };
 
-const deleteTask = (req,res) => {
-     const id = Number(req.params.id);
-    const deleted = taskService.deleteTask(id);
+const deleteTask = async (req, res) => {
+    const deleted = await taskService.deleteTask(req.params.id);
+
     if (!deleted) {
         return res.status(404).json({
             message: "Task not found"
         });
     }
+
     res.json({
         message: "Task deleted successfully"
     });
@@ -53,10 +55,16 @@ const uploadAttachment = (req, res) => {
         }
     });
 };
+const getTaskStats = async (req, res) => {
+    const stats = await taskService.getTaskStats();
+    res.json(stats);
+};
+
 module.exports = {
     getTasks,
     createTask,
     updateTask,
     deleteTask,
-    uploadAttachment
+    uploadAttachment,
+    getTaskStats
 };

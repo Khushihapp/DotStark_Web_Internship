@@ -1,44 +1,47 @@
-const tasks = [
-    {id : 1, title:"Learn React",completed : true},
-    {id : 2 ,title:"Learn Express", completed : true}
-];
-const getTasks = () => {
-    return tasks;
-}
+const Task = require("../models/task");
 
-const createTask = (title) => {
-    const newTask = {
-        id: tasks.length +1,
-        title : title,
-        completed : false
-    };
-    tasks.push(newTask);
-    return newTask;
+const getTasks = async () => {
+    return await Task.find();
 };
 
-const updateTask = (id,title,completed) => {
-    const task = tasks.find(task => task.id === id);
-    if (!task){
-        return null;
-    }
-    task.title = title;
-    task.completed= completed;
-    return task;
+const createTask = async (title) => {
+    return await Task.create({
+        title: title,
+        completed: false
+    });
 };
 
-const deleteTask =(id) => {
-    const index = tasks.findIndex(task => task.id === id);
-        if (index === -1){
-            return false;
+const updateTask = async (id, title, completed) => {
+    return await Task.findByIdAndUpdate(
+        id,
+        {
+            title: title,
+            completed: completed
+        },
+        {
+            new: true,
+            runValidators: true
         }
-        tasks.splice(index,1);
-          return true;
+    );
 };
 
-module.exports={
+const deleteTask = async (id) => {
+    const deletedTask = await Task.findByIdAndDelete(id);
+    return deletedTask !== null;
+};
+
+const getTaskStats = async () => {
+    return await Task.aggregate([
+        {
+            $group: {_id: "$completed",count: { $sum: 1 } }
+        }
+    ]);
+};
+
+module.exports = {
     getTasks,
     createTask,
     updateTask,
-    deleteTask
-
+    deleteTask,
+    getTaskStats
 };

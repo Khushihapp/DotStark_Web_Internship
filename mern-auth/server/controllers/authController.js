@@ -1,11 +1,9 @@
-
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-const User = require("../model/user");
-
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import User from "../model/user.js";
 const register = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password ,role} = req.body;
 
         const existingUser = await User.findOne({ email });
 
@@ -20,7 +18,8 @@ const register = async (req, res) => {
         const user = await User.create({
             name,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            role : role||"user"
         });
 
         res.status(201).json({
@@ -63,7 +62,8 @@ const login = async (req, res) => {
             return res.status(400).json({message: "Invalid email or password"});
         }
         const token = jwt.sign(
-            { userId: user._id },
+            { userId: user._id,
+                role: user.role},
             process.env.JWT_SECRET,
             { expiresIn: "1d" }
         );
@@ -76,6 +76,6 @@ const login = async (req, res) => {
         res.status(500).json({message: "Server error"});
     }
 };
-module.exports = {register,login};
+export{register,login};
 
 

@@ -1,7 +1,7 @@
+import express from "express";
+import { register, login } from "../controllers/authController.js";
+import authenticateToken from "../middleware/authMiddleware.js";
 
-const express = require("express");
-const { register,login } = require("../controllers/authController");
-const authenticateToken = require("../middleware/authMiddleware");
 const router = express.Router();
 
 router.get("/profile", authenticateToken, (req, res) => {
@@ -12,5 +12,7 @@ router.get("/profile", authenticateToken, (req, res) => {
 });
 
 router.post("/register", register);
-router.post("/login",login);
-module.exports = router;
+
+router.post("/login", login);
+
+export default router;

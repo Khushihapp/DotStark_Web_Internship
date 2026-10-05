@@ -14,7 +14,7 @@ function Dashboard() {
         const token = localStorage.getItem("token");
 
         const response = await axios.get(
-            "http://localhost:5000/api/auth/profile",
+            "http://192.168.31.2:5000/api/auth/profile",
             {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -33,16 +33,14 @@ function Dashboard() {
         const token = localStorage.getItem("token");
 
         const response = await axios.get(
-            "http://localhost:5000/api/tasks",
+            "http://192.168.31.2:5000/api/tasks",
             {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             }
         );
-
         setTasks(response.data);
-        console.log(response.data);
     };
 
     const addTask = async (e) => {
@@ -62,7 +60,7 @@ function Dashboard() {
             const token = localStorage.getItem("token");
 
             await axios.post(
-                "http://localhost:5000/api/tasks",
+                "http://192.168.31.2:5000/api/tasks",
                 {
                     title: title,
                     completed: false
@@ -78,7 +76,6 @@ function Dashboard() {
             await getTasks();
 
         } catch (error) {
-            console.log(error);
             alert("Failed to add task");
         }
     };
@@ -87,7 +84,7 @@ function Dashboard() {
         const token = localStorage.getItem("token");
 
         const response = await axios.put(
-            `http://localhost:5000/api/tasks/${task._id}`,
+            `http://192.168.31.2:5000/api/tasks/${task._id}`,
             {
                 title: task.title,
                 completed: !task.completed
@@ -110,7 +107,7 @@ function Dashboard() {
         const token = localStorage.getItem("token");
 
         await axios.delete(
-            `http://localhost:5000/api/tasks/${id}`,
+            `http://192.168.31.2:5000/api/tasks/${id}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -135,7 +132,10 @@ function Dashboard() {
                     </strong>
                 </p>
 
-                <button onClick={() => {localStorage.removeItem("token"); window.location.href = "/";}}>
+                <button onClick={() => {
+                localStorage.removeItem("token");
+                 window.location.href = "/";
+                 }}>
                     Logout
                 </button>
             </nav>
@@ -180,13 +180,13 @@ function Dashboard() {
                                 : "Pending"}
                         </p>
 
-                        <button
+                        <button className ="task-btn"
                             onClick={() => updateTask(task)}
                         >
                             Complete
                         </button>
 
-                        <button
+                        <button className ="task-btn"
                             onClick={() => deleteTask(task._id)}
                         >
                             Delete

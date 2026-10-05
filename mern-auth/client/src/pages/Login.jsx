@@ -17,7 +17,7 @@ function Login() {
 
         try {
             const response = await axios.post(
-                "http://localhost:5000/api/auth/login",
+                "http://192.168.31.2:5000/api/auth/login",
                 {
                     email: email,
                     password: password
@@ -40,6 +40,7 @@ function Login() {
             <h2>Login</h2>
 
             <input
+                className ="Login-input"
                 type="email"
                 placeholder="Email"
                 value={email}
@@ -47,6 +48,7 @@ function Login() {
             />
 
             <input
+                className = "Login-input"
                 type="password"
                 placeholder="Password"
                 value={password}

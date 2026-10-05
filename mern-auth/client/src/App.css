@@ -45,3 +45,16 @@ main h1 {
         padding: 20px 15px;
     }
 }
+
+.task-btn {
+    margin-right: 8px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.login-input {
+    display: block;
+    margin-bottom: 12px;
+    
+}

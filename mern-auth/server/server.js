@@ -19,6 +19,6 @@ app.use("/api/tasks", taskroutes);
 
 app.use("/api/auth", authRoutes);
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT,"0.0.0.0", () => {
     console.log("Server running on port 5000");
 });

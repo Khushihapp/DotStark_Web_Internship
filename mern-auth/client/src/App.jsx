@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useEffect, useState } from "react";
-
+import Register from "./pages/Register";
 function Dashboard() {
     const [tasks, setTasks] = useState([]);
     const [title, setTitle] = useState("");
@@ -206,7 +206,10 @@ function App() {
                     path="/"
                     element={<Login />}
                 />
-
+                <Route
+                path="/register"
+                element={<Register />}
+                />
                 <Route
                     path="/dashboard"
                     element={

@@ -1,46 +1,43 @@
-
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-function Login() {
+function Register() {
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
     const navigate = useNavigate();
-
-    const handleLogin = async (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
 
-        console.log("LOGIN CLICKED");
-        console.log("SENDING REQUEST");
-
         try {
-            const response = await axios.post(
-                "http://192.168.31.2:5000/api/auth/login",
+            await axios.post(
+                "http://192.168.31.2:5000/api/auth/register",
                 {
-                    email: email,
-                    password: password
+                    name,
+                    email,
+                    password
                 }
             );
 
-            console.log("RESPONSE:", response.data);
-
-            localStorage.setItem("token", response.data.token);
-
-            navigate("/dashboard");
-
+            alert("Registration successful");
+            navigate("/");
         } catch (error) {
-            console.log("ERROR:", error);
+            alert(error.response?.data?.message || "Registration failed");
         }
     };
 
     return (
         <div>
-            <h2>Login</h2>
+            <h2>Register</h2>
 
             <input
-                className ="Login-input"
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+            />
+
+            <input
                 type="email"
                 placeholder="Email"
                 value={email}
@@ -48,21 +45,21 @@ function Login() {
             />
 
             <input
-                className = "Login-input"
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button onClick={handleLogin}>
-                Login
-            </button>
-            <button onClick={() => navigate("/register")}>
+            <button onClick={handleRegister}>
                 Register
+            </button>
+
+            <button onClick={() => navigate("/")}>
+                Back to Login
             </button>
         </div>
     );
 }
 
-export default Login;
+export default Register;
